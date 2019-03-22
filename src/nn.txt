@@ -1,0 +1,93 @@
+import React from 'react';
+
+const Card = ({name, email, id}) => {
+    return (
+        <div className="bg-light-green dib br3 pa3 ma2 bw3 grow tc shadow-5">
+            <img alt="robot" src={`https://robohash.org/${id}?size=200x200`} />
+            <div>
+                <h2>{name}</h2>
+                <p>{email}</p>
+            </div>
+        </div>
+    ) 
+}
+
+export default Card
+
+App
+
+import React, {Component} from "react";
+import CardList from "./CardList";
+import SearchBox from "./SearchBox";
+import {robots} from './robot';
+
+class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            robots: robots,
+            searchField: ""
+        }
+    }
+
+    onSearchChange = (event) => {
+        this.setState({searchField: event.target.value});
+        
+        // console.log(filterCard);
+    }
+
+    render() {
+        const filterCard = this.state.robots.filter(robot => {
+            return robot.name.toLowerCase().includes(this.state.searchField.toLowerCase())
+        })
+        return (
+            <div className='tc'>
+                <h1>RoboFriends</h1>
+                <SearchBox searchChange = {this.onSearchChange}/>
+                <CardList robots = {filterCard}/>
+            </div>
+        )
+    }
+}
+
+export default App;
+
+CardList
+
+import React from "react";
+import Card from "./Card";
+
+const CardList = ({robots}) => {
+    const cardArray = robots.map (user => {
+        return (
+            <Card 
+                key={user.id} 
+                id={user.id} 
+                name={user.name} 
+                email={user.email}
+            />
+        )
+    })
+    return (
+        <div>
+            {cardArray};
+        </div>
+    )
+}
+
+export default CardList;
+
+import React from "react";
+
+const searchBox = ({searchField, searchChange}) => {
+    return (
+        <input 
+            type='search'
+            className="pa3 ba b--green bg-lightest-blue"
+            placeholder="Search"
+            onChange = {searchChange}
+        />
+    )
+}
+
+export default searchBox;
