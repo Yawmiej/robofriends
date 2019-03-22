@@ -19,3 +19,8 @@ h1 {
   font-weight: 700;
   letter-spacing: 10px;
 }
+
+.crd {
+  width: 300px;
+  height: 350px;
+}
