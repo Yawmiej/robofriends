@@ -3,6 +3,7 @@ import CardList from "../components/CardList"
 import SearchBox from "../components/SearchBox";
 import {robots} from "../robot";
 import Scroll from "../components/Scroll";
+import ErrorBoundry from "../components/ErrorBoundry";
 
 
 class App extends Component {
@@ -24,7 +25,9 @@ class App extends Component {
                 <h1>Robofriends</h1>
                 <SearchBox searchChange = {this.onSearchChange}/>
                 <Scroll>
-                    <CardList robots={filteredRobot}/>
+                    <ErrorBoundry>
+                        <CardList robots={filteredRobot}/>
+                    </ErrorBoundry>
                 </Scroll>
             </div>
         )
